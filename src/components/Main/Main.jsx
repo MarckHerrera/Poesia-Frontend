@@ -17,15 +17,15 @@ const Main = () => {
             <LocalizationProvider dateAdapter={AdapterMoment}>
 
                     <Routes>
-                        <Route path="*" element={<Navigate to="/" replace />} />
-                        <Route path="/" element={
+                        <Route path="*" element={<Navigate to="" replace />} />
+                        <Route path="" element={
 
 
                             <Formulario
                             />
 
                         } />
-                        <Route path="/reporte" element={
+                        <Route path="reporte" element={
 
 
                             <Reporte
