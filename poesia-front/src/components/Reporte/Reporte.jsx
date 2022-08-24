@@ -19,7 +19,7 @@ const Reporte = () => {
 
   const usuarioData = async () => {
 
-    const ros = await fetch('http://localhost:3000/api/verFichas', {
+    const ros = await fetch('https://poesiagt.herokuapp.com/api/verFichas', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

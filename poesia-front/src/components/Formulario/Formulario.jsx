@@ -66,7 +66,7 @@ const Formulario = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch('http://localhost:3000/api/solicitudFicha', {
+                fetch('https://poesiagt.herokuapp.com/api/solicitudFicha', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
