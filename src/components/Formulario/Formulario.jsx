@@ -1,11 +1,12 @@
-import { Avatar, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material'
+import { Avatar, Button, Fab, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField } from '@mui/material'
 import React from 'react'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RegexTextField from './RegexTextField';
 import { useNavigate } from 'react-router-dom';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { LocalizationProvider } from '@mui/x-date-pickers';
+import { DesktopDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -13,10 +14,10 @@ import { Box } from '@mui/system';
 
 const Formulario = () => {
 
-    const paperStyle = { padding: 20, height: '88vh', width: 400, margin: '20px auto', backgroundColor: 'rgb(211, 193, 224)' }
+
     const avatarStyle = { backgroundColor: '#8D40DB' }
-    const btnStyle = { margin: '10px 0' }
-    const TFStyle = { margin: '5px 0' }
+    const btnStyle = { marginTop: '15px',}
+    const TFStyle = { margin: '4px 0' }
 
     const onlyAlphanumericRegex = /[^a-z1-9]/gi;
     const onlyNumbers = /[^1-9]/gi;
@@ -92,7 +93,7 @@ const Formulario = () => {
                                 iconColor: '#03b1bb',
                                 title: res.mensaje
                             })
-                        }else{
+                        } else {
 
                             setValueNombre('')
                             setValueCarnet('')
@@ -101,26 +102,24 @@ const Formulario = () => {
                             setValueGeneroDePoesia('')
                             setValueTelefono('')
                             setValueCarrera('')
-            
+
                             setValueFechaNacimiento(Date.now())
-            
+
                             Toast.fire({
                                 icon: 'success',
                                 iconColor: '#03b1bb',
-                                title: 'Verificacion ' + 'Aprobada'
+                                title: 'Participante ' + 'Aprobado'
                             })
-
-                            navigate('/reporte', { replace: true })
 
                         }
 
                     })
 
-                
 
 
 
-                
+
+
 
             }
         })
@@ -128,73 +127,83 @@ const Formulario = () => {
     };
 
 
+    const handleClick = e => {
+        navigate('reporte', { replace: true })
+
+    }
+
+
 
     return (
-        <Grid >
-            <Paper elevation={10} style={paperStyle}>
-                <Grid align="center" >
+        <>
 
-                    <Avatar style={avatarStyle}><MenuBookIcon /></Avatar>
-                    <h2>Recital</h2>
-                </Grid>
-                <Box component="form" sx={{ width: '100%' }} onSubmit={handleSubmit}>
-                    <TextField style={TFStyle} label='Nombre Completo' placeholder='Nombre Completo' fullWidth required value={valueNombre} onChange={(e) => setValueNombre(e.target.value)} />
-                    <RegexTextField style={TFStyle} label='Carnet' placeholder='Carnet' fullWidth required regex={onlyAlphanumericRegex} value={valueCarnet} onChange={(e) => setValueCarnet(e.target.value)} inputProps={{ maxLength: 8 }} />
-                    <TextField style={TFStyle} label='Dirección' placeholder='Dirección' fullWidth required value={valueDireccion} onChange={(e) => setValueDireccion(e.target.value)} />
+            <Grid >
 
-                    <FormControl fullWidth required style={TFStyle}>
-                        <InputLabel id="demo-simple-select-label">Genero</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                <Paper elevation={10} sx={{ padding: 2, width: 400, margin: '0px auto ', backgroundColor: 'rgb(211, 193, 224)' }}>
 
-                            label='Genero'
-                            value={valueGenero}
-                            onChange={(e) => setValueGenero(e.target.value)}
-                        >
-                            <MenuItem value={'M'}>Masculino</MenuItem>
-                            <MenuItem value={'F'}>Femenino</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <Grid align="center" >
 
-                    <FormControl fullWidth required style={TFStyle}>
-                        <InputLabel id="demo-simple-select-label2">Genero de poesia</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label2"
-                            id="demo-simple-select2"
+                        <Avatar style={avatarStyle}><MenuBookIcon /></Avatar>
+                        <h2>Recital</h2>
+                    </Grid>
+                    <Box component="form" onSubmit={handleSubmit} align="center">
+                        <TextField style={TFStyle} label='Nombre Completo' placeholder='Nombre Completo' fullWidth required value={valueNombre} onChange={(e) => setValueNombre(e.target.value)} />
+                        <RegexTextField style={TFStyle} label='Carnet' placeholder='Carnet' fullWidth required regex={onlyAlphanumericRegex} value={valueCarnet} onChange={(e) => setValueCarnet(e.target.value)} inputProps={{ maxLength: 8 }} />
+                        <TextField style={TFStyle} label='Dirección' placeholder='Dirección' fullWidth required value={valueDireccion} onChange={(e) => setValueDireccion(e.target.value)} />
 
-                            label='Genero de poesia'
-                            value={valueGeneroDePoesia}
-                            onChange={(e) => setValueGeneroDePoesia(e.target.value)}
-                        >
-                            <MenuItem value={'Épico'}>Épico</MenuItem>
-                            <MenuItem value={'Lírico'}>Lírico</MenuItem>
-                            <MenuItem value={'Dramático'}>Dramático</MenuItem>
-                        </Select>
-                    </FormControl>
+                        <FormControl fullWidth required style={TFStyle}>
+                            <InputLabel id="demo-simple-select-label">Genero</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+
+                                label='Genero'
+                                value={valueGenero}
+                                onChange={(e) => setValueGenero(e.target.value)}
+                            >
+                                <MenuItem value={'M'}>Masculino</MenuItem>
+                                <MenuItem value={'F'}>Femenino</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl fullWidth required style={TFStyle}>
+                            <InputLabel id="demo-simple-select-label2">Genero de poesia</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label2"
+                                id="demo-simple-select2"
+
+                                label='Genero de poesia'
+                                value={valueGeneroDePoesia}
+                                onChange={(e) => setValueGeneroDePoesia(e.target.value)}
+                            >
+                                <MenuItem value={'Épico'}>Épico</MenuItem>
+                                <MenuItem value={'Lírico'}>Lírico</MenuItem>
+                                <MenuItem value={'Dramático'}>Dramático</MenuItem>
+                            </Select>
+                        </FormControl>
 
 
-                    <FormControl fullWidth required style={TFStyle}>
-                        <MobileDatePicker
-                            label="For mobile"
-                            value={valueFechaNacimiento}
-                            onChange={(newValue) => {
-                                setValueFechaNacimiento(newValue._d.toLocaleDateString());
-                                console.log(newValue._d.toLocaleDateString());
-                            }}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </FormControl>
+                        <FormControl fullWidth required style={TFStyle}>
+                            <DesktopDatePicker
+                                label="For mobile"
+                                value={valueFechaNacimiento}
+                                onChange={(newValue) => {
+                                    setValueFechaNacimiento(newValue._d.toLocaleDateString());
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </FormControl>
 
-                    <RegexTextField style={TFStyle} label='Teléfono' placeholder='Teléfono' fullWidth required regex={onlyNumbers} value={valueTelefono} onChange={(e) => setValueTelefono(e.target.value)} inputProps={{ maxLength: 8 }} />
-                    <TextField style={TFStyle} label='Carrera' placeholder='Carrera' fullWidth required value={valueCarrera} onChange={(e) => setValueCarrera(e.target.value)} />
+                        <RegexTextField style={TFStyle} label='Teléfono' placeholder='Teléfono' fullWidth required regex={onlyNumbers} value={valueTelefono} onChange={(e) => setValueTelefono(e.target.value)} inputProps={{ maxLength: 8 }} />
+                        <TextField style={TFStyle} label='Carrera' placeholder='Carrera' fullWidth required value={valueCarrera} onChange={(e) => setValueCarrera(e.target.value)} />
 
-                    <Button type='submit' color='primary' fullWidth variant='contained' style={btnStyle}>Enviar</Button>
+                        <Button type='submit' color='primary' fullWidth variant='contained' style={btnStyle}>Enviar</Button>
+                        <Button color='primary' fullWidth variant='contained' style={btnStyle} onClick={handleClick} ><ArrowForwardIcon /> Reporte <ArrowForwardIcon /></Button>
 
-                </Box>
-            </Paper>
-        </Grid>
-
+                    </Box>
+                </Paper>
+            </Grid>
+        </>
     )
 }
 
